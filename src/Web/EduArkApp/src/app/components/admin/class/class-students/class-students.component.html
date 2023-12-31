@@ -1,0 +1,156 @@
+<div class="col-12 p-0">
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+			<div class="form-group">
+				<label>Student Name</label
+				><input
+					type="text"
+					[(ngModel)]="name"
+					[ngModelOptions]="{ standalone: true }"
+					class="p-inputtext-sm"
+					[style]="{ width: '100%' }"
+					placeholder="Search by name"
+					pInputText
+					(keyup)="filterStudentByName($event.target.value)"
+				/>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+			<div class="form-group">
+				<label>Academic Year</label
+				><p-dropdown
+					[options]="academicYears"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="currentAcademicYearId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					[disabled]="true"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+			<div class="form-group">
+				<label>Academic Level</label>
+				<p-dropdown
+					[options]="academicLevels"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="currentAcademicLevelId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					[disabled]="true"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+			<div class="form-group">
+				<label>Class Name</label>
+				<p-dropdown
+					[options]="classNames"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="currentClassNameId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					[disabled]="true"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="pb-4">
+			<app-class-settings
+				(getAllStudentsEvent)="getStudentsByFilter()"
+				*ngIf="isSettingVisible"
+				[currentClassNameId]="currentClassNameId"
+				[currentAcademicYearId]="currentAcademicYearId"
+				[currentAcademicLevelId]="currentAcademicLevelId"
+			></app-class-settings>
+		</div>
+
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<p-table
+				[value]="listOfStudents"
+				[paginator]="true"
+				[rows]="pageSize"
+				[(first)]="currentPage"
+				[lazy]="true"
+				(onLazyLoad)="loadClassStudents($event)"
+				[responsive]="true"
+				currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+				[rowsPerPageOptions]="[10, 20, 50]"
+				[totalRecords]="totalRecordCount"
+				styleClass="p-datatable-gridlines p-datatable-sm"
+				selectionMode="single"
+			>
+				<ng-template pTemplate="header">
+					<tr>
+						<th>
+							<span>
+								<button class="btn btn-icon icon-left btn-primary" *ngIf="!isSettingVisible" (click)="showSetting()">
+									<i class="pi pi-spin pi-cog" style="font-size: 1rem"></i>
+									Show Settings
+								</button></span
+							><span>
+								<button class="btn btn-icon icon-left btn-primary" *ngIf="isSettingVisible" (click)="hideSetting()">
+									<i
+										class="pi pi-spin pi-cog"
+										style="font-size: 1rem"
+										leaveActiveClass="fadeout"
+										leaveToClass="hidden"
+									></i>
+									Hide Settings
+								</button></span
+							>
+						</th>
+						<th>Full Name</th>
+						<th>AdmissionNo</th>
+						<th>EmegencyContactNo1</th>
+						<th>EmegencyContactNo2</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-studentRowData>
+					<tr>
+						<td>
+							<div class="buttons">
+								<span>
+									<button class="btn btn-icon btn-sm btn-primary"><i class="far fa-edit"></i> Edit</button>
+
+									<button class="btn btn-icon btn-sm btn-danger" [disabled]="true">
+										<i class="far fa-trash-alt"></i> Delete
+									</button>
+								</span>
+							</div>
+						</td>
+						<td>{{ studentRowData.firstName }} {{ studentRowData.lastName }}</td>
+						<td>{{ studentRowData.admissionNo }}</td>
+						<td>{{ studentRowData.emegencyContactNo1 }}</td>
+						<td>{{ studentRowData.emegencyContactNo2 }}</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+	</div>
+</div>

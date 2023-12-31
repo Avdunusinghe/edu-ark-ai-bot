@@ -1,0 +1,301 @@
+<section class="main-content">
+	<p-confirmDialog
+		[style]="{ width: '25vw' }"
+		acceptButtonStyleClass="p-button-raised p-button-danger"
+		rejectButtonStyleClass="p-button-raised p-button-success"
+	></p-confirmDialog>
+
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Admin</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+		<li class="breadcrumb-item">Users</li>
+	</ul>
+	<div class="section-body">
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+					<div class="p-10">
+						<div class="row">
+							<div class="col-12">
+								<div class="row m-0">
+									<div class="col-12 p-0">
+										<div class="ngxTableHeader">
+											<div class="table-title">
+												<h2><strong>User</strong></h2>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row">
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Search</label>
+												<input
+													type="text"
+													[(ngModel)]="name"
+													[ngModelOptions]="{ standalone: true }"
+													class="p-inputtext-sm"
+													[style]="{ width: '100%' }"
+													placeholder="Search by name"
+													name="searchText"
+													pInputText
+												/>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Role</label>
+												<p-dropdown
+													[options]="roles"
+													class="p-inputtext-sm"
+													optionLabel="name"
+													optionValue="id"
+													[(ngModel)]="selectedUserRole"
+													[ngModelOptions]="{ standalone: true }"
+													[style]="{ width: '100%' }"
+													placeholder="-All-"
+												>
+													<div [style]="{ width: '100%' }">
+														<ng-template let-item pTemplate="item">
+															{{ item.name }}
+														</ng-template>
+													</div>
+												</p-dropdown>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Active Status</label>
+												<p-dropdown
+													[options]="userActiveStatus"
+													class="p-inputtext-sm"
+													optionLabel="name"
+													optionValue="id"
+													[(ngModel)]="selectedUserActiveStatus"
+													[ngModelOptions]="{ standalone: true }"
+													[style]="{ width: '100%' }"
+												>
+													<div [style]="{ width: '100%' }">
+														<ng-template let-item pTemplate="item">
+															{{ item.name }}
+														</ng-template>
+													</div>
+												</p-dropdown>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-5">
+											<button class="btn btn-primary me-2" (click)="getAllUsersByFilter()">Search</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<p-table
+									[value]="listOfUsers"
+									[paginator]="true"
+									[rows]="pageSize"
+									[(first)]="currentPage"
+									[lazy]="true"
+									(onLazyLoad)="loadUsers($event)"
+									[responsive]="true"
+									currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+									[rowsPerPageOptions]="[10, 20, 50]"
+									[totalRecords]="totalRecordCount"
+									styleClass="p-datatable-gridlines p-datatable-sm"
+								>
+									<ng-template pTemplate="header">
+										<tr>
+											<th>
+												<span>
+													<button
+														class="btn btn-icon icon-left btn-primary rounded-button"
+														(click)="openUserDetailFormDialog()"
+													>
+														<i class="material-icons">add</i>
+													</button></span
+												>
+											</th>
+											<th>Name</th>
+											<th>Email</th>
+											<th>CreatedOn</th>
+											<th>CreatedBy</th>
+										</tr>
+									</ng-template>
+									<ng-template pTemplate="body" let-user>
+										<tr>
+											<td>
+												<div class="buttons">
+													<span>
+														<button class="btn btn-icon btn-sm btn-primary" (click)="openUserDetailEditDialog(user)">
+															<i class="far fa-edit"></i> Edit
+														</button>
+
+														<button
+															class="btn btn-icon btn-sm btn-danger"
+															[disabled]="!user.isActive"
+															(click)="deleteUser(user.id)"
+														>
+															<i class="far fa-trash-alt"></i> Delete
+														</button>
+													</span>
+												</div>
+											</td>
+											<td>{{ user.firstName }} {{ user.LasterName }}</td>
+											<td>{{ user.email }}</td>
+											<td>{{ user.createdDate }}</td>
+											<td>{{ user.createdUser }}</td>
+										</tr>
+									</ng-template>
+								</p-table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p-dialog
+		header="{{ headerText }}"
+		[(visible)]="visibleUserDetailFormDialog"
+		(onHide)="closeUserDetailFormDialog()"
+		[modal]="true"
+		[maximizable]="true"
+		[style]="{ width: '50vw' }"
+	>
+		<ng-template pTemplate="content">
+			<div class="row">
+				<form [formGroup]="userDetailForm" *ngIf="userDetailForm">
+					<div class="row">
+						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+							<label>First Name<span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="p-inputtext-sm"
+								placeholder="First Name"
+								formControlName="firstName"
+								required
+								[style]="{ width: '100%' }"
+								pInputText
+							/>
+							<small
+								class="form-text text-danger"
+								*ngIf="!userDetailForm.get('firstName').valid && userDetailForm.get('firstName').touched"
+							>
+								Please enter first name</small
+							>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+							<label>Last Name<span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="p-inputtext-sm"
+								placeholder="First Name"
+								formControlName="lastName"
+								required
+								[style]="{ width: '100%' }"
+								pInputText
+							/>
+							<small
+								class="form-text text-danger"
+								*ngIf="!userDetailForm.get('lastName').valid && userDetailForm.get('lastName').touched"
+							>
+								Please enter last name</small
+							>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+							<label>User Name<span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="p-inputtext-sm"
+								placeholder="User Name"
+								formControlName="userName"
+								required
+								[style]="{ width: '100%' }"
+								pInputText
+							/>
+							<small
+								class="form-text text-danger"
+								*ngIf="!userDetailForm.get('userName').valid && userDetailForm.get('userName').touched"
+							>
+								Please enter user name</small
+							>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+							<label>Email<span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="p-inputtext-sm"
+								placeholder="Email"
+								formControlName="email"
+								required
+								[style]="{ width: '100%' }"
+								pInputText
+							/>
+							<small
+								class="form-text text-danger"
+								*ngIf="!userDetailForm.get('email').valid && userDetailForm.get('email').touched"
+							>
+								Please enter email</small
+							>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+							<label>Phone number<span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="p-inputtext-sm"
+								placeholder="phoneNumber"
+								formControlName="phoneNumber"
+								required
+								[style]="{ width: '100%' }"
+								pInputText
+							/>
+							<small
+								class="form-text text-danger"
+								*ngIf="!userDetailForm.get('phoneNumber').valid && userDetailForm.get('phoneNumber').touched"
+							>
+								Please enter phone number</small
+							>
+						</div>
+
+						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+							<label>User Role<span class="text-danger">*</span></label>
+							<p-multiSelect
+								[options]="roles"
+								[style]="{ width: '100%', height: '60%' }"
+								defaultLabel="Select Role"
+								formControlName="roles"
+								appendTo="body"
+								optionLabel="name"
+								optionValue="id"
+								display="chip"
+								[filter]="false"
+							></p-multiSelect>
+							<small
+								class="form-text text-danger"
+								*ngIf="!userDetailForm.get('roles').valid && userDetailForm.get('roles').touched"
+							>
+								Please select role</small
+							>
+						</div>
+					</div>
+				</form>
+			</div>
+		</ng-template>
+
+		<ng-template pTemplate="footer">
+			<div class="form-button">
+				<button class="btn btn-primary" type="submit" (click)="saveUser()">
+					{{ userId === 0 ? 'Save user' : 'Update user' }}
+				</button>
+				<button class="btn btn-warning" (click)="closeUserDetailFormDialog()">Cancel</button>
+			</div>
+		</ng-template>
+	</p-dialog>
+</section>

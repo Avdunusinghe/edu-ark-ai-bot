@@ -1,0 +1,221 @@
+<form [formGroup]="classDetailForm" *ngIf="classDetailForm">
+	<div class="row">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Academic Year<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="academicYears"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="academicYearId"
+				[style]="{ width: '100%' }"
+				placeholder="Select Academic Year"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('academicYearId').valid && classDetailForm.get('academicYearId').touched"
+			>
+				Class Name is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Academic Level <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="academicLevels"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="academicLevelId"
+				[style]="{ width: '100%' }"
+				placeholder="Select Academic Level"
+				(onChange)="onAcademicLevelChanged()"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('academicLevelId').valid && classDetailForm.get('academicLevelId').touched"
+			>
+				Academic Level is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Class Name <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="classNames"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="classNameId"
+				[style]="{ width: '100%' }"
+				placeholder="Select Class Name"
+				(onChange)="onClassNameChanged()"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('classNameId').valid && classDetailForm.get('classNameId').touched"
+			>
+				Class name is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Assigned Name <span class="text-danger">*</span></label>
+			<input
+				type="text"
+				class="p-inputtext-sm"
+				placeholder="Class Name"
+				formControlName="name"
+				required
+				[style]="{ width: '100%' }"
+				pInputText
+			/>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('name').valid && classDetailForm.get('name').touched"
+			>
+				Class name is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Class Teacher <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="allTeachers"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="classTeacherId"
+				[style]="{ width: '100%' }"
+				placeholder="Select Class Teacher"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('classTeacherId').valid && classDetailForm.get('classTeacherId').touched"
+			>
+				Class teacher is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Class Category <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="classCategories"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="classCategoryId"
+				[style]="{ width: '100%' }"
+				placeholder="Select Class Stream"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('classCategoryId').valid && classDetailForm.get('classCategoryId').touched"
+			>
+				Class Category is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Class Stream <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="languageStreams"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="languageStreamId"
+				[style]="{ width: '100%' }"
+				placeholder="Select Class Stream"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classDetailForm.get('languageStreamId').valid && classDetailForm.get('languageStreamId').touched"
+			>
+				Class Steam is required</small
+			>
+		</div>
+		<div class="row pt-2">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<p-table
+					[value]="classSubjectTeachers"
+					[responsive]="true"
+					styleClass="p-datatable-gridlines p-datatable-sm"
+					selectionMode="single"
+				>
+					<ng-template pTemplate="header">
+						<tr>
+							<th>#</th>
+							<th>Subject Name</th>
+							<th>Subject Teacher</th>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+						<tr style="max-height: 20px">
+							<td>
+								{{ rowIndex + 1 }}
+							</td>
+							<td>
+								{{ rowData.subjectName }}
+							</td>
+							<td>
+								<p-dropdown
+									[options]="rowData.allSubjectTeachers"
+									[(ngModel)]="rowData.subjectTeacherId"
+									[ngModelOptions]="{ standalone: true }"
+									(onChange)="onSubjectTeacherChange($event.target.value)"
+									class="p-inputtext-sm"
+									optionLabel="name"
+									optionValue="id"
+									appendTo="body"
+									[style]="{ width: '100%' }"
+									[disabled]="isClassTeacher === true ? false : true"
+								>
+									<div [style]="{ width: '100%' }">
+										<ng-template let-item pTemplate="item">
+											{{ item.name }}
+										</ng-template>
+									</div>
+								</p-dropdown>
+							</td>
+						</tr>
+					</ng-template>
+				</p-table>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="row mt-2 mb-4" *ngIf="isClassTeacher === true">
+	<div class="text-right">
+		<button type="submit" class="btn btn-primary float-right" (click)="saveClassDetails()">Save</button>
+	</div>
+</div>

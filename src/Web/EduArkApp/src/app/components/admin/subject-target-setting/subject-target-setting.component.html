@@ -1,0 +1,252 @@
+<section class="main-content">
+	<p-confirmDialog
+		[style]="{ width: '40vw' }"
+		acceptButtonStyleClass="p-button-raised p-button-success"
+		rejectButtonStyleClass="p-button-raised p-button-danger"
+	></p-confirmDialog>
+
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Admin</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/admin/admin"> <i class="fas fa-home font-17"></i></a>
+		</li>
+		<li class="breadcrumb-item">Student Performance Analyzer Service</li>
+	</ul>
+	<div class="section-body">
+		<p-accordion>
+			<p-accordionTab header="Readme">
+				<p
+					style="
+						font-size: 18px;
+						font-weight: bold;
+						color: #333;
+						background-color: #f9f9f9;
+						padding: 10px;
+						border-radius: 5px;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+					"
+				>
+					Step 1
+				</p>
+				<p style="font-size: 16px; margin-bottom: 10px; color: #555">
+					Select academic Level (Grade), then the system will automatically load related subjects.
+				</p>
+				<p
+					style="
+						font-size: 18px;
+						font-weight: bold;
+						color: #333;
+						background-color: #f9f9f9;
+						padding: 10px;
+						border-radius: 5px;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+					"
+				>
+					Step 2
+				</p>
+				<p style="font-size: 16px; margin-bottom: 10px; color: #555">Select target subject.</p>
+				<p
+					style="
+						font-size: 18px;
+						font-weight: bold;
+						color: #333;
+						background-color: #f9f9f9;
+						padding: 10px;
+						border-radius: 5px;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+					"
+				>
+					Step 3
+				</p>
+				<p style="font-size: 16px; margin-bottom: 10px; color: #555">Select exam type.</p>
+				<p
+					style="
+						font-size: 18px;
+						font-weight: bold;
+						color: #333;
+						background-color: #f9f9f9;
+						padding: 10px;
+						border-radius: 5px;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+					"
+				>
+					Step 4
+				</p>
+				<p style="font-size: 16px; margin-bottom: 10px; color: #555">Select academic Semester (term).</p>
+				<p
+					style="
+						font-size: 18px;
+						font-weight: bold;
+						color: #333;
+						background-color: #f9f9f9;
+						padding: 10px;
+						border-radius: 5px;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+					"
+				>
+					Step 5
+				</p>
+				<p style="font-size: 16px; margin-bottom: 10px; color: #555">Click Run Service</p>
+			</p-accordionTab>
+		</p-accordion>
+		<p-card
+			header="Student Performance Analyzer Service"
+			[style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }"
+		>
+			<div class="p-10">
+				<form [formGroup]="subjectTargetSettingForm" *ngIf="subjectTargetSettingForm">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<label>Academic Year<span class="text-danger">*</span></label>
+							<p-dropdown
+								[options]="academicYears"
+								formControlName="currentAcademicYear"
+								optionLabel="name"
+								class="p-inputtext-sm"
+								optionValue="id"
+								[style]="{ width: '100%' }"
+								appendTo="body"
+							>
+								<div [style]="{ width: '100%' }">
+									<ng-template let-item pTemplate="item">
+										{{ item.name }}
+									</ng-template>
+								</div>
+							</p-dropdown>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<label>Academic Levels<span class="text-danger">*</span></label>
+							<p-dropdown
+								[options]="academicLevels"
+								formControlName="academicLevel"
+								optionLabel="name"
+								class="p-inputtext-sm"
+								optionValue="id"
+								[style]="{ width: '100%' }"
+								placeholder="Select Academic Level"
+								appendTo="body"
+								(onChange)="getSubjectsByAcademicLevelId()"
+							>
+								<div [style]="{ width: '100%' }">
+									<ng-template let-item pTemplate="item">
+										{{ item.name }}
+									</ng-template>
+								</div>
+							</p-dropdown>
+							<small
+								class="form-text text-danger"
+								*ngIf="
+									!subjectTargetSettingForm.get('academicLevel').valid &&
+									subjectTargetSettingForm.get('academicLevel').touched
+								"
+							>
+								Please Select Academic Level</small
+							>
+						</div>
+						<div
+							class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+							*ngIf="academicLevelId > 0 && subjects.length > 0"
+							[@fadeInOut]="academicLevelId > 0 && subjects.length > 0 ? 'in' : 'out'"
+						>
+							<label>Subjects<span class="text-danger">*</span></label>
+							<p-dropdown
+								[options]="subjects"
+								formControlName="subject"
+								optionLabel="name"
+								class="p-inputtext-sm"
+								optionValue="id"
+								[style]="{ width: '100%' }"
+								placeholder="Select Subject"
+								appendTo="body"
+							>
+								<div [style]="{ width: '100%' }">
+									<ng-template let-item pTemplate="item">
+										{{ item.name }}
+									</ng-template>
+								</div> </p-dropdown
+							><small
+								class="form-text text-danger"
+								*ngIf="
+									!subjectTargetSettingForm.get('subject').valid && subjectTargetSettingForm.get('subject').touched
+								"
+							>
+								Please Select Subject</small
+							>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-1">
+							<label>Exam Type <span class="text-danger">*</span></label>
+							<p-dropdown
+								[options]="examTypes"
+								formControlName="examTypeId"
+								optionLabel="name"
+								class="p-inputtext-sm"
+								optionValue="id"
+								[style]="{ width: '100%' }"
+								placeholder="Select Exam"
+								appendTo="body"
+							>
+								<div [style]="{ width: '100%' }">
+									<ng-template let-item pTemplate="item">
+										{{ item.name }}
+									</ng-template>
+								</div>
+							</p-dropdown>
+							<small
+								class="form-text text-danger"
+								*ngIf="
+									!subjectTargetSettingForm.get('examTypeId').valid &&
+									subjectTargetSettingForm.get('examTypeId').touched
+								"
+							>
+								Please select exam type</small
+							>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-1">
+							<label>Semester<span class="text-danger">*</span></label>
+							<p-dropdown
+								[options]="semesters"
+								formControlName="currentSemester"
+								optionLabel="name"
+								class="p-inputtext-sm"
+								optionValue="id"
+								[style]="{ width: '100%' }"
+								placeholder="Select Semester"
+								appendTo="body"
+							>
+								<div [style]="{ width: '100%' }">
+									<ng-template let-item pTemplate="item">
+										{{ item.name }}
+									</ng-template>
+								</div>
+							</p-dropdown>
+							<small
+								class="form-text text-danger"
+								*ngIf="
+									!subjectTargetSettingForm.get('currentSemester').valid &&
+									subjectTargetSettingForm.get('currentSemester').touched
+								"
+							>
+								Please Select Semester</small
+							>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-4">
+							<button
+								type="button"
+								class="btn btn-primary"
+								[disabled]="!subjectTargetSettingForm.valid"
+								(click)="runService()"
+							>
+								Run Service
+							</button>
+						</div>
+					</div>
+					<div class="row col-6 pt-5" *ngIf="progressBarVisible === ture">
+						<p-progressBar [value]="precentage"></p-progressBar>
+					</div>
+				</form>
+			</div>
+		</p-card>
+	</div>
+</section>

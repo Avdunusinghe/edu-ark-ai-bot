@@ -1,0 +1,128 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style">
+        <li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">LEARNING-PLAN</h5>
+		</li>
+        <li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+        <li class="breadcrumb-item">LEARNING-PLAN</li>
+    </ul>
+
+    <hr>
+
+    <div class="section-body">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="p-10">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row m-0">
+                                    <div class="col-12 p-0">
+                                        <div class="ngxTableHeader">
+											<div class="table-title">
+												<h2><strong>LESSON - UPDATE</strong></h2>
+											</div>
+										</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <hr>
+                                <form [formGroup]="lessonUnitsUpdateForm" *ngIf="lessonUnitsUpdateForm">
+                                <!-- <form> -->
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                        <label>Lesson Name<span class="text-danger">*</span></label>
+                                        <input
+											type="text"
+											class="p-inputtext-sm"
+											placeholder="Lesson Name"
+											formControlName="lessonName"
+											required
+											[style]="{ width: '100%' }"
+											pInputText
+										/>
+                                        <!-- <small
+											class="form-text text-danger"
+											*ngIf="!lessonUnitsUpdateForm.get('lessonName').valid && lessonUnitsUpdateForm.get('lessonName').touched"
+										>
+											Lesson name is required
+                                        </small> -->
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                        <label>Lesson Description <span class="text-danger">*</span></label>
+                                        <input
+											type="text"
+											class="p-inputtext-sm"
+											placeholder="Lesson Description"
+											formControlName="lessonDescription"
+											required
+											[style]="{ width: '100%' }"
+											pInputText
+										/>
+                                        <!-- <small
+											class="form-text text-danger"
+											*ngIf="!lessonUnitsUpdateForm.get('lessonDescription').valid && lessonUnitsUpdateForm.get('lessonDescription').touched"
+										>
+											Lesson Description is required
+                                        </small> -->
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                        <label>Lesson Grade<span class="text-danger">*</span></label>
+                                        <input
+											type="text"
+											class="p-inputtext-sm"
+											placeholder="Lesson Grade"
+											formControlName="lessonGrade"
+											required
+											[style]="{ width: '100%' }"
+											pInputText
+										/>
+                                        <!-- <small
+											class="form-text text-danger"
+											*ngIf="!lessonUnitsUpdateForm.get('lessonGrade').valid && lessonUnitsUpdateForm.get('lessonGrade').touched"
+										>
+											Lesson name is required
+                                        </small> -->
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                        <label>Lesson Subject<span class="text-danger">*</span></label>
+                                        <input
+											type="text"
+											class="p-inputtext-sm"
+											placeholder="Lesson Subject"
+											formControlName="lessonSubject"
+											required
+											[style]="{ width: '100%' }"
+											pInputText
+										/>
+                                        <!-- <small
+											class="form-text text-danger"
+											*ngIf="!lessonUnitsUpdateForm.get('lessonSubject').valid && lessonUnitsUpdateForm.get('lessonSubject').touched"
+										>
+											Lesson Subject is required
+                                        </small> -->
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2 mb-4">
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-primary float-right">Save</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+

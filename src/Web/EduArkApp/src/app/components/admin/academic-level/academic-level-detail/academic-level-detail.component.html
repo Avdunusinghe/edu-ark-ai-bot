@@ -1,0 +1,55 @@
+<form [formGroup]="academicLevelDetailForm" *ngIf="academicLevelDetailForm">
+	<div class="row">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Name<span class="text-danger">*</span></label>
+			<input
+				type="text"
+				class="p-inputtext-sm"
+				placeholder="Name"
+				formControlName="name"
+				required
+				[style]="{ width: '100%' }"
+				pInputText
+			/>
+			<small
+				class="form-text text-danger"
+				*ngIf="!academicLevelDetailForm.get('name').valid && academicLevelDetailForm.get('name').touched"
+			>
+				Name is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Level Head<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="levelHeads"
+				formControlName="levelHeadId"
+				optionLabel="name"
+				class="p-inputtext-sm"
+				[filter]="true"
+				filterBy="name"
+				optionValue="id"
+				(onFilter)="getLevelHeadsByFilter($event)"
+				[style]="{ width: '100%' }"
+				placeholder="Select level head"
+				appendTo="body"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-levelHead pTemplate="item">
+						{{ levelHead.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+		</div>
+		<div class="modal-footer">
+			<!--Academic Year Save Button -->
+			<button
+				type="button"
+				class="btn btn-primary"
+				(click)="saveAcademicLevel()"
+				[disabled]="!academicLevelDetailForm.valid"
+			>
+				Save
+			</button>
+		</div>
+	</div>
+</form>

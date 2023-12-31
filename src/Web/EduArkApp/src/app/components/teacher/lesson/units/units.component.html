@@ -1,0 +1,280 @@
+<section class="main-content">
+    <p-confirmDialog
+        [style]="{ width: '25vw' }"
+        acceptButtonStyleClass="p-button-raised p-button-danger"
+        rejectButtonStyleClass="p-button-raised p-button-success"
+    ></p-confirmDialog>
+
+    <ul class="breadcrumb breadcrumb-style">
+        <li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">LEARNING-PLAN</h5>
+		</li>
+        <li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+        <li class="breadcrumb-item">LEARNING-PLAN</li>
+    </ul>
+
+    <hr>
+
+    <div class="section-body">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="p-10">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row m-0">
+                                    <div class="col-12 p-0">
+                                        <div class="ngxTableHeader">
+                                            
+                                            <div class="table-title">
+                                                <ul class="breadcrumb breadcrumb-style">
+                                                    <li class="breadcrumb-item">
+                                                        <h5 class="page-title m-b-0">ACADEMIC GRADE</h5>
+                                                    </li>
+                                                    
+                                                    <li  class="breadcrumb-item bcrumb-1">
+                                                        <p-dropdown
+                                                            [options]=""
+                                                            class="p-inputtext-sm"
+                                                            optionLabel=""
+                                                            optionValue=""
+                                                        >
+
+                                                        </p-dropdown>
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <div class="buttons" style="margin-left: 640px;">
+                                                            <span>
+                                                                <p-tag severity="success" value="ADD NEW LESSON " class="btn btn-icon btn-sm"></p-tag>
+                                                                <button 
+                                                                    class="btn btn-icon btn-sm btn-success"
+                                                                    (click)="navigationToTheLessonUnit(0)"
+                                                                >
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </span> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+											</div>
+
+                                        </div>
+
+                                        <hr>  
+
+                                        <div class="section-body">
+                                            <div class="row clearfix">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="card">
+                                                        <div class="p-10">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="row m-0">
+                                                                        <div class="col-12 p-0">
+                                                                            <div class="ngxTableHeader">
+                                                                                <div class="table-title">
+                                                                                    <ul class="breadcrumb breadcrumb-style">
+                                                                                        <li class="breadcrumb-item">
+                                                                                            <h6 class="page-title m-b-0">LIST OF THE SUBJECTS</h6>
+                                                                                        </li>  
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div> 
+                                                                            
+                                                                            <div class="section-body">
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                                        <div class="card">
+                                                                                            <div class="p-10">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="row m-0">
+                                                                                                            <div class="col-12 p-0">
+                                                                                                                <div class="ngxTableHeader">
+                                                                                                                    <div class="table-title">
+                                                                                                                        <ul class="breadcrumb breadcrumb-style">
+                                                                                                                            <li class="breadcrumb-item">
+                                                                                                                                <h6 class="page-title m-b-0">LIST OF THE LESSONS</h6>
+                                                                                                                            </li> 
+
+                                                                                                                            <!-- <div class="buttons" style="margin-left: 910px;">
+                                                                                                                                <span>
+                                                                                                                                    <button 
+                                                                                                                                        class="btn btn-icon btn-sm btn-primary"
+                                                                                                                                        (click)="navigationToTheLessonUnit(0)"
+                                                                                                                                    >
+                                                                                                                                        <i class="fa fa-plus"></i>
+                                                                                                                                    </button>
+                                                                                                                                </span>                                                                                                                                    
+                                                                                                                            </div>  -->
+                                                                                                                        </ul>
+                                                                                                                    </div>
+                                                                                                                </div>
+
+                                                                                                                <!-- List of lessons using p-accordion -->
+                                                                                                                <p-accordion [activeIndex]="selectedLessonIndex">
+                                                                                                                    <ng-container *ngFor="let lesson of listoflessons">
+                                                                                                                        <p-accordionTab header = "{{lesson.lessonName}}">
+                                                                                                                            <p>
+                                                                                                                                {{ lesson.lessonDescription }}
+                                                                                                                            </p>
+
+                                                                                                                            <p-divider></p-divider>
+                                                                                                                            <p-table [tableStyle]="{ 'min-width': '50rem' }">
+                                                                                                                                <ng-template pTemplate="header">
+                                                                                                                                    <tr>
+                                                                                                                                        <th>
+                                                                                                                                            <p-card [style]="{ width: '320px' }">
+                                                                                                                                                <ng-template pTemplate="header">
+                                                                                                                                                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                                                                                                                                                </ng-template>
+                                                                                                                                                <button 
+                                                                                                                                                    class="btn btn-icon btn-sm btn-success" 
+                                                                                                                                                    (click)="watchLesson()"
+                                                                                                                                                >
+                                                                                                                                                    <i class="fa fa-eye"></i>
+                                                                                                                                                    
+                                                                                                                                                </button>
+                                                                                                                                            </p-card>
+                                                                                                                                        </th>
+                                                                                                                                        <th>
+                                                                                                                                            <p-card [style]="{ width: '320px' }">
+                                                                                                                                                <ng-template pTemplate="header">
+                                                                                                                                                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                                                                                                                                                </ng-template>
+                                                                                                                                                <button
+                                                                                                                                                    class="btn btn-icon btn-sm btn-success" 
+                                                                                                                                                    (click)="listenLesson()"
+                                                                                                                                                >
+                                                                                                                                                    <i class="fas fa-headset"></i>
+                                                                                                                                                </button>
+                                                                                                                                            </p-card>
+                                                                                                                                        </th>
+                                                                                                                                        <th>
+                                                                                                                                            <p-card [style]="{ width: '320px' }">
+                                                                                                                                                <ng-template pTemplate="header">
+                                                                                                                                                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                                                                                                                                                </ng-template>
+                                                                                                                                                <button
+                                                                                                                                                    class="btn btn-icon btn-sm btn-success" 
+                                                                                                                                                    (click)="listenLesson()"
+                                                                                                                                                >
+                                                                                                                                                    <i class="fas fa-file"></i>
+                                                                                                                                                </button>
+                                                                                                                                            </p-card>
+                                                                                                                                        </th>
+                                                                                                                                    </tr>
+                                                                                                                                </ng-template>
+                                                                                                                            </p-table>
+
+                                                                                                                            <p-divider></p-divider>
+                                                                                                                            
+                                                                                                                            <div class="buttons">
+                                                                                                                                <span>
+                                                                                                                                    <button 
+                                                                                                                                        class="btn btn-icon btn-sm btn-warning" 
+                                                                                                                                        (click)="navigationToTheLessonUnit(lesson.id)">
+                                                                                                                                        <i class="far fa-edit"></i>
+                                                                                                                                    </button>
+                                                                                                                                    <button 
+                                                                                                                                        class="btn btn-icon btn-sm btn-danger" 
+                                                                                                                                        (click)="deleteLesson(lesson.id)"
+                                                                                                                                    >
+                                                                                                                                        <i class="far fa-trash-alt"></i>
+                                                                                                                                    </button>
+                                                                                                                                </span>
+                                                                                                                            </div>
+                                                                                                                        </p-accordionTab>
+                                                                                                                    </ng-container>
+                                                                                                                </p-accordion>
+
+                                                                                                                <br>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <!-- <p-dialog
+                                                                                header = "{{ headerText }}"
+                                                                                [(visible)]="visibleUserDetailFormDialog"
+                                                                                (onHide)="closeLessonUnitForm()"
+                                                                                [modal]="true"
+                                                                                [maximizable]="true"
+                                                                                [style]="{ width: '50vw' }"
+                                                                            >
+
+                                                                                <ng-template pTemplate="content">
+                                                                                    <div class="row">
+                                                                                        <form [formGroup]="lessonUnitForm" *ngIf="lessonUnitForm"> 
+                                                                                        <form>
+                                                                                            <div class="row"> 
+                                                                                                first field 
+                                                                                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                                                                                    <label> LESSON NAME (UNIT-NAME)
+                                                                                                        <span class="text-danger">*</span>
+                                                                                                    </label>
+                                                                                                    <input 
+                                                                                                        type="text"
+                                                                                                        class="p-inputtext-sm"
+                                                                                                        placeholder="lesson-name"
+                                                                                                        formControlName="lessonName"
+                                                                                                        required
+                                                                                                        [style]="{ width: '100%' }"
+                                                                                                        pInputText
+                                                                                                    />
+                                                                                                   <small
+                                                                                                        class="form-text text-danger"
+                                                                                                        *ngIf="!lessonUnitForm.get('lessonUnitName').valid && lessonUnitForm.get('lessonUnitName').touched"
+                                                                                                    >
+                                                                                                        Please enter the Lesson (Unit) Name
+                                                                                                    </small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </ng-template>
+
+                                                                                <ng-template pTemplate="footer">
+                                                                                    <div class="form-button">
+                                                                                        <button class="btn btn-primary" type="submit" (click)="saveLessonUnit()">
+                                                                                            {{lessonId === 0 ? 'Save Lesson Unit' : 'Update Lesson'}}
+                                                                                        </button>
+                                                                                        <button class="btn btn-warning" (click)="closeLessonUnitForm()">
+                                                                                            Canccel
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </ng-template>
+                                                                            </p-dialog> -->
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

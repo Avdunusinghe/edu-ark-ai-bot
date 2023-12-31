@@ -1,0 +1,47 @@
+<form [formGroup]="classNameDetailForm" *ngIf="classNameDetailForm">
+	<div class="row">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Name<span class="text-danger">*</span></label>
+			<input
+				type="text"
+				class="p-inputtext-sm"
+				placeholder="Name"
+				formControlName="name"
+				required
+				[style]="{ width: '100%' }"
+				pInputText
+			/>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classNameDetailForm.get('name').valid && classNameDetailForm.get('name').touched"
+			>
+				Name is required</small
+			>
+		</div>
+
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Description<span class="text-danger">*</span></label>
+			<input
+				type="text"
+				class="p-inputtext-sm"
+				placeholder="Description"
+				formControlName="description"
+				required
+				[style]="{ width: '100%' }"
+				pInputText
+			/>
+			<small
+				class="form-text text-danger"
+				*ngIf="!classNameDetailForm.get('description').valid && classNameDetailForm.get('description').touched"
+			>
+				Description is required</small
+			>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" [disabled]="!classNameDetailForm.valid" (click)="saveClassName()">
+				Save
+			</button>
+		</div>
+	</div>
+</form>

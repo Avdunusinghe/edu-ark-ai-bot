@@ -1,0 +1,248 @@
+<div class="col-12 p-0">
+	<div class="row">
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Search</label>
+				<input
+					type="text"
+					[(ngModel)]="name"
+					[ngModelOptions]="{ standalone: true }"
+					class="p-inputtext-sm"
+					[style]="{ width: '100%' }"
+					placeholder="Search by name"
+					name="searchText"
+					pInputText
+				/>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Academic Year</label>
+				<p-dropdown
+					[options]="academicYears"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="academicYearId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					[disabled]="true"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Academic Level</label>
+				<p-dropdown
+					[options]="academicLevels"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="academicLevelId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					[disabled]="true"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Class Name </label>
+				<p-dropdown
+					[options]="classNames"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="classNameId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					[disabled]="true"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Subject </label>
+				<p-dropdown
+					[options]="subjects"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="subjectId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Exam Type </label>
+				<p-dropdown
+					[options]="examTypes"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="examTypeId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					(onChange)="getExamMasterData()"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label>Semester</label>
+				<p-dropdown
+					[options]="semesters"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="semesterId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+					(onChange)="getExamMasterData()"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" *ngIf="exams.length > 0">
+			<div class="form-group">
+				<label>Exam </label>
+				<p-dropdown
+					[options]="exams"
+					class="p-inputtext-sm"
+					optionLabel="name"
+					optionValue="id"
+					[(ngModel)]="examId"
+					[ngModelOptions]="{ standalone: true }"
+					[style]="{ width: '100%' }"
+				>
+					<div [style]="{ width: '100%' }">
+						<ng-template let-item pTemplate="item">
+							{{ item.name }}
+						</ng-template>
+					</div>
+				</p-dropdown>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pt-4">
+			<button class="btn btn-icon btn-lg btn-primary" (click)="getExamMarksByFilter()" [disabled]="exams.length === 0">
+				<i class="fa fa-search"></i> Apply Filter
+			</button>
+		</div>
+	</div>
+	<app-exam-mark-setting></app-exam-mark-setting>
+</div>
+
+<div class="row pt-4">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<p-table
+			[columns]="columns"
+			[value]="listOfStudentMarks"
+			[paginator]="true"
+			[rows]="pageSize"
+			[(first)]="currentPage"
+			[lazy]="true"
+			(onLazyLoad)="loadStudentMarksLazy($event)"
+			[responsive]="true"
+			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+			[rowsPerPageOptions]="[10, 20, 50]"
+			[totalRecords]="totalRecordCount"
+			styleClass="p-datatable-gridlines p-datatable-sm"
+			selectionMode="single"
+		>
+			<ng-template pTemplate="header" let-columns>
+				<tr>
+					<th>
+						<button class="btn btn-icon btn-sm btn-info" (click)="saveExamMarks()">
+							<i class="fa fa-eye"></i> Save Marks
+						</button>
+					</th>
+					<th>Registration Number</th>
+					<th>Student Name</th>
+					<th>Profile</th>
+					<th>Mark</th>
+					<th>Grade</th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-rowData>
+				<tr>
+					<td style="align-items: center">
+						<div class="buttons">
+							<span>
+								<button class="btn btn-icon btn-sm btn-info" (click)="viewClassDetails(rowData)">
+									<i class="fa fa-save"></i> View
+								</button>
+							</span>
+						</div>
+					</td>
+					<td [width]="300">{{ rowData.registrationNumber }}</td>
+					<td [width]="300">{{ rowData.studentName }}</td>
+					<td style="text-align: center">
+						<!-- Custom rendering for the 'studentProfileImage' column -->
+						<img
+							*ngIf="rowData.profileImage; else defaultImage"
+							src="rowData.profileImage"
+							alt="Student Image"
+							width="50"
+							height="50"
+						/>
+						<ng-template #defaultImage>
+							<!-- Display another image when 'studentProfileImage' is null or empty -->
+							<img src="assets/images/users/user-2.png" alt="Default Image" width="50" height="50" />
+						</ng-template>
+					</td>
+					<td [width]="100">
+						<p-inputNumber
+							[(ngModel)]="rowData.marks"
+							[ngModelOptions]="{ standalone: true }"
+							inputId="minmax"
+							mode="decimal"
+							[min]="0"
+							[max]="100"
+							styleClass="p-inputtext-sm"
+						>
+						</p-inputNumber>
+					</td>
+					<td [width]="100">{{ rowData.grade }}</td>
+				</tr>
+			</ng-template>
+		</p-table>
+	</div>
+	<p *ngIf="listOfStudentMarks.length === 0" style="font-weight: 500">Data Not Found Please Filter Data</p>
+</div>

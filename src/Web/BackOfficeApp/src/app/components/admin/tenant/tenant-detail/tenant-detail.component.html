@@ -1,0 +1,209 @@
+<section class="main-content">
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Admin</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+
+		<li class="breadcrumb-item">Tenant Details</li>
+	</ul>
+	<div class="section-body">
+		<div class="row">
+			<div class="col-12 col-md-12 col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<p-tabView>
+							<p-tabPanel header="{{ tenantId === 0 ? 'Tenant Registration' : 'Tenant Detail' }}">
+								<form class="register-form m-4" [formGroup]="tenantRegistrationForm" *ngIf="tenantRegistrationForm">
+									<div class="row">
+										<p>Besic Details</p>
+										<div class="form-group col-md-6">
+											<label for="name">Name<span class="text-danger">*</span></label>
+											<input
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												id="name"
+												type="text"
+												placeholder="Enter name"
+												formControlName="name"
+												required
+												pInputText
+											/>
+											<small
+												class="form-text text-danger"
+												*ngIf="!tenantRegistrationForm.get('name').valid && tenantRegistrationForm.get('name').touched"
+											>
+												Tenant name is required</small
+											>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="name">Domain<span class="text-danger">*</span></label>
+											<input
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												(keyup)="validateTenantDomain()"
+												id="name"
+												type="text"
+												placeholder="Enter Domain"
+												formControlName="domain"
+												required
+												pInputText
+											/>
+											<small
+												class="form-text text-danger"
+												*ngIf="
+													tenantRegistrationForm.get('domain').hasError('required') &&
+													tenantRegistrationForm.get('domain').touched
+												"
+											>
+												Domain name is required</small
+											>
+											<small
+												class="form-text text-danger"
+												*ngIf="tenantRegistrationForm.get('domain').hasError('isExist')"
+											>
+												Domain name already exists</small
+											>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="contactEmail">Is Government School<span class="text-danger">*</span></label>
+											<div class="row col-md-4">
+												<p-inputSwitch formControlName="isGovernmentSchool"></p-inputSwitch>
+											</div>
+										</div>
+										<p>Insfrastructure</p>
+										<div class="form-group col-md-6" *ngIf="tenantId == 0">
+											<label for="name">Database Server<span class="text-danger">*</span></label>
+											<p-dropdown
+												class="p-inputtext-sm"
+												[options]="serverDetails"
+												formControlName="databaseServer"
+												optionLabel="name"
+												optionValue="serverName"
+												[style]="{ width: '100%' }"
+												placeholder="Select Database Server"
+												required
+											>
+												<ng-template let-server pTemplate="item">
+													<div class="country-item">
+														<div>{{ server.name }}</div>
+													</div>
+												</ng-template>
+											</p-dropdown>
+											<small
+												class="form-text text-danger"
+												*ngIf="
+													!tenantRegistrationForm.get('databaseServer').valid &&
+													tenantRegistrationForm.get('databaseServer').touched
+												"
+												>Database Server is required
+											</small>
+										</div>
+										<div class="form-group col-md-8" *ngIf="tenantId > 0">
+											<label for="name">Connection String</label>
+											<input
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												id="name"
+												type="text"
+												formControlName="connectionString"
+												pInputText
+											/>
+										</div>
+										<p>SMTP Configuration (Optional)</p>
+										<div class="form-group col-md-6">
+											<label for="name">SMTP Server</label>
+											<p-dropdown
+												class="p-inputtext-sm"
+												[options]="null"
+												formControlName="sMTPServer"
+												optionLabel="name"
+												optionValue="id"
+												[style]="{ width: '100%' }"
+												placeholder="Select SMTP Server"
+											>
+												<ng-template let-server pTemplate="item">
+													<div class="country-item">
+														<div>{{ server.name }}</div>
+													</div>
+												</ng-template>
+											</p-dropdown>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="name">SMTP Username</label>
+											<input
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												id="name"
+												type="text"
+												placeholder="SMTP Username"
+												formControlName="sMTPUsername"
+												pInputText
+											/>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="name">SMTP Password</label>
+											<input
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												id="name"
+												type="text"
+												placeholder="SMTP Password"
+												formControlName="sMTPPassword"
+												pInputText
+											/>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="name">SMTP Port</label>
+											<input
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												id="name"
+												type="text"
+												placeholder="SMTP Port"
+												formControlName="sMTPPort"
+												required
+												pInputText
+											/>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="contactEmail">Is SMTP use SSL</label>
+											<div class="row col-md-4">
+												<p-inputSwitch formControlName="isSMTPUseSSL"></p-inputSwitch>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<label for="name">Special Notes</label>
+											<textarea
+												rows="5"
+												cols="30"
+												[style]="{ width: '100%' }"
+												class="p-inputtext-sm"
+												placeholder="Special Notes"
+												formControlName="specialNotes"
+												pInputTextarea
+											></textarea>
+										</div>
+									</div>
+									<div class="text-right">
+										<button
+											class="btn btn-primary mt-2 mr-3 me-2 pull-right"
+											[disabled]="tenantRegistrationForm.invalid"
+											(click)="saveTenant()"
+										>
+											{{ tenantId === 0 ? 'Save' : 'Edit' }}
+										</button>
+									</div>
+								</form>
+							</p-tabPanel>
+							<p-tabPanel header="Features"> </p-tabPanel>
+							<p-tabPanel header=""> </p-tabPanel>
+						</p-tabView>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

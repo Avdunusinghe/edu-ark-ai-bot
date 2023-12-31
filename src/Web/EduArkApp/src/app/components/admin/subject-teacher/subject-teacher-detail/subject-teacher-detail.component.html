@@ -1,0 +1,72 @@
+<form [formGroup]="subjectTeacherForm" *ngIf="subjectTeacherForm">
+	<div class="row">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Academic Year <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="academicYears"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="academicYearId"
+				[style]="{ width: '100%' }"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Academic Level <span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="academicLevels"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="academicLevelId"
+				[style]="{ width: '100%' }"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label>Subjects<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="subjects"
+				class="p-inputtext-sm"
+				optionLabel="name"
+				optionValue="id"
+				formControlName="subjectId"
+				[style]="{ width: '100%' }"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-item pTemplate="item">
+						{{ item.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+			<label for="assignedTeachers">Assigned Teachers <span class="text-danger">*</span></label>
+			<p-multiSelect
+				[options]="teachers"
+				id="assignedTeachers"
+				[style]="{ width: '100%' }"
+				formControlName="assignedTeacherIds"
+				optionLabel="name"
+				optionValue="id"
+				display="chip"
+				apendTo="body"
+			></p-multiSelect>
+		</div>
+		<div class="modal-footer">
+			<!--Academic Year Save Button -->
+			<button type="button" class="btn btn-primary" (click)="saveSubjectTeacher()">Save</button>
+		</div>
+	</div>
+</form>

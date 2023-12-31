@@ -1,0 +1,22 @@
+:host ::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link {
+	padding: 1.25rem;
+	border: 1px solid #dee2e6;
+	color: #6c757d;
+	background: #f8f9fa;
+	font-weight: 700;
+	border-radius: 0px;
+	height: 12px;
+	transition: box-shadow 0.2s;
+}
+
+:host ::ng-deep .p-accordion .p-accordion-content {
+	padding: 1.25rem;
+	border: 1px solid #dee2e6;
+	background: #ffffff;
+	color: #495057;
+	border-top: 0;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}

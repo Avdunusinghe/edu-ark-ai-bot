@@ -1,0 +1,163 @@
+<div id="contentToConvert">
+	<div class="row pt-2">
+		<div class="col-md-6">
+			<div class="card author-box" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+				<div class="card-body">
+					<div class="author-box-center">
+						<img
+							alt="image"
+							[src]="
+								studentBasicDataModel?.profileUrl != ''
+									? studentBasicDataModel?.profileUrl
+									: 'assets/images/users/user-2.png'
+							"
+							class="img-circle user-img-circle"
+							width="150px"
+							height="150px"
+						/>
+					</div>
+				</div>
+			</div>
+			<div class="card" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+				<div class="card-header">
+					<h4>Personal Details</h4>
+				</div>
+				<div class="card-body">
+					<div class="py-4">
+						<p class="clearfix">
+							<span class="float-start"> Full Name </span>
+							<span class="float-end text-muted">
+								{{ studentBasicDataModel?.fullName }}
+							</span>
+						</p>
+						<p class="clearfix">
+							<span class="float-start"> Emergency ContactNo1 </span>
+							<span class="float-end text-muted"> {{ studentBasicDataModel?.emegencyContactNo1 }}</span>
+						</p>
+						<p class="clearfix">
+							<span class="float-start"> Emergency ContactNo2 </span>
+							<span class="float-end text-muted"> {{ studentBasicDataModel?.emegencyContactNo2 }}</span>
+						</p>
+						<p class="clearfix">
+							<span class="float-start"> Email </span>
+							<span class="float-end text-muted"> {{ studentBasicDataModel?.email }} </span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="card author-box" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+					<div class="card-body">
+						<div class="form-group col-md-12 col-12">
+							<label>Study Hours</label>
+							<div class="form-group form-check col-md-6 col-12">
+								<div class="form-check form-check-inline">
+									<p-radioButton value="5" [(ngModel)]="studyHours" [disabled]="true"></p-radioButton>
+									<label class="form-check-label" for="flexCheckDefault1">Approximately 5 hours</label>
+								</div>
+							</div>
+
+							<div class="form-group form-check col-md-6 col-12">
+								<div class="form-check form-check-inline">
+									<p-radioButton value="10" [(ngModel)]="studyHours" [disabled]="true"></p-radioButton>
+									<label class="form-check-label" for="flexCheckDefault2">Approximately 10 hours</label>
+								</div>
+							</div>
+
+							<div class="form-group form-check col-md-6 col-12">
+								<div class="form-check form-check-inline">
+									<p-radioButton value="15" [(ngModel)]="studyHours" [disabled]="true"></p-radioButton>
+									<label class="form-check-label" for="flexCheckDefault3">Approximately 15 hours</label>
+								</div>
+							</div>
+
+							<div class="form-group form-check col-md-6 col-12">
+								<div class="form-check form-check-inline">
+									<p-radioButton value="20" [(ngModel)]="studyHours" [disabled]="true"></p-radioButton>
+									<label class="form-check-label" for="flexCheckDefault4">Approximately 20 hours</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-md-12 col-12">
+							<label>What do you think are the most important factors that influence your academic performance?</label>
+							<div class="form-group form-check col-md-12 col-12">
+								<div class="form-check form-check-inline">
+									<p-checkbox
+										[(ngModel)]="studentAcademicBehaviorModel.personalMotivation"
+										[binary]="true"
+										inputId="personalMotivation"
+										[disabled]="true"
+									></p-checkbox>
+									<label class="form-check-label" for="flexCheckDefault1">Personal Motivation</label>
+								</div>
+							</div>
+
+							<div class="form-group form-check col-md-12 col-12">
+								<div class="form-check form-check-inline">
+									<p-checkbox
+										[(ngModel)]="studentAcademicBehaviorModel.studyEnvironment"
+										[binary]="true"
+										[disabled]="true"
+									></p-checkbox>
+									<label class="form-check-label" for="flexCheckDefault2">Study Environment</label>
+								</div>
+							</div>
+
+							<div class="form-group form-check col-md-12 col-12">
+								<div class="form-check form-check-inline">
+									<p-checkbox
+										[(ngModel)]="studentAcademicBehaviorModel.teacherInstructorQuality"
+										[binary]="true"
+										[disabled]="true"
+									></p-checkbox>
+									<label class="form-check-label" for="flexCheckDefault3">Teacher/Instructor Quality</label>
+								</div>
+							</div>
+
+							<div class="form-group form-check col-md-12 col-12">
+								<div class="form-check form-check-inline">
+									<p-checkbox
+										[(ngModel)]="studentAcademicBehaviorModel.priorKnowledgeOfTheSubject"
+										[binary]="true"
+										[disabled]="true"
+									></p-checkbox>
+									<label class="form-check-label" for="flexCheckDefault4">Prior Knowledge of the Subject</label>
+								</div>
+							</div>
+							<div class="form-group form-check col-md-12 col-12">
+								<div class="form-check form-check-inline">
+									<p-checkbox
+										[(ngModel)]="studentAcademicBehaviorModel.classAttendance"
+										[binary]="true"
+										[disabled]="true"
+									></p-checkbox>
+									<label class="form-check-label" for="flexCheckDefault5">Class Attendance</label>
+								</div>
+							</div>
+							<div class="form-group form-check col-md-12 col-12">
+								<div class="form-check form-check-inline">
+									<p-checkbox
+										[(ngModel)]="studentAcademicBehaviorModel.timeManagementSkills"
+										[binary]="true"
+										[disabled]="true"
+									></p-checkbox>
+									<label class="form-check-label" for="flexCheckDefault5">Time Management Skills</label>
+								</div>
+							</div>
+							<div class="form-group col-md-12 col-12">
+								<label>How confident are you in your ability to predict your own academic performance? </label>
+								<p-knob
+									[(ngModel)]="studentAcademicBehaviorModel.confidentAcademicPerformance"
+									[ngModelOptions]="{ standalone: true }"
+									[disabled]="true"
+								></p-knob>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

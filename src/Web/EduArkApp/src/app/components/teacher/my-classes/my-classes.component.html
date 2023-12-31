@@ -1,0 +1,206 @@
+<section class="main-content">
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Teacher</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+		<li class="breadcrumb-item">{{ headerText }}</li>
+	</ul>
+	<div class="section-body">
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<p-card header="{{ headerText }}" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+					<div class="p-10">
+						<div class="col-12 p-0">
+							<div class="row">
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3">
+									<div class="form-group">
+										<label>Search</label>
+										<input
+											type="text"
+											[(ngModel)]="name"
+											[ngModelOptions]="{ standalone: true }"
+											class="p-inputtext-sm"
+											[style]="{ width: '100%' }"
+											placeholder="Search by name"
+											name="searchText"
+											pInputText
+											(keyup)="onFilterTextChanged()"
+										/>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3">
+									<div class="form-group">
+										<label>Academic Year</label>
+										<p-dropdown
+											[options]="academicYears"
+											class="p-inputtext-sm"
+											optionLabel="name"
+											optionValue="id"
+											[(ngModel)]="academicYearId"
+											[ngModelOptions]="{ standalone: true }"
+											[style]="{ width: '100%' }"
+											[disabled]="false"
+										>
+											<div [style]="{ width: '100%' }">
+												<ng-template let-item pTemplate="item">
+													{{ item.name }}
+												</ng-template>
+											</div>
+										</p-dropdown>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3">
+									<div class="form-group">
+										<label>Academic Level</label>
+										<p-dropdown
+											[options]="academicLevels"
+											class="p-inputtext-sm"
+											optionLabel="name"
+											optionValue="id"
+											[(ngModel)]="academiclLevelId"
+											[ngModelOptions]="{ standalone: true }"
+											[style]="{ width: '100%' }"
+											(onChange)="onFilterDropDownChanged()"
+										>
+											<div [style]="{ width: '100%' }">
+												<ng-template let-item pTemplate="item">
+													{{ item.name }}
+												</ng-template>
+											</div>
+										</p-dropdown>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3">
+									<div class="form-group">
+										<label>Language Stream</label>
+										<p-dropdown
+											[options]="languageStreams"
+											class="p-inputtext-sm"
+											optionLabel="name"
+											optionValue="id"
+											[(ngModel)]="languageStreamId"
+											[ngModelOptions]="{ standalone: true }"
+											[style]="{ width: '100%' }"
+											(onChange)="onFilterDropDownChanged()"
+										>
+											<div [style]="{ width: '100%' }">
+												<ng-template let-item pTemplate="item">
+													{{ item.name }}
+												</ng-template>
+											</div>
+										</p-dropdown>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3">
+									<div class="form-group">
+										<label>Class Categories</label>
+										<p-dropdown
+											[options]="classCategories"
+											class="p-inputtext-sm"
+											optionLabel="name"
+											optionValue="id"
+											[(ngModel)]="classCategoryId"
+											[ngModelOptions]="{ standalone: true }"
+											[style]="{ width: '100%' }"
+											(onChange)="onFilterDropDownChanged()"
+										>
+											<div [style]="{ width: '100%' }">
+												<ng-template let-item pTemplate="item">
+													{{ item.name }}
+												</ng-template>
+											</div>
+										</p-dropdown>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3" *ngIf="subjects.length > 0">
+									<div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+										<div class="form-group">
+											<label class="d-block"> Subject Classes </label>
+											<p-inputSwitch
+												styleClass="col-md-3 pt-2"
+												[(ngModel)]="showMySubjectClasses"
+												(onChange)="onShowMySubjectClassesChanged()"
+											></p-inputSwitch>
+										</div>
+									</div>
+								</div>
+								<div
+									class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3"
+									*ngIf="showMySubjectClasses && subjects.length > 0"
+								>
+									<div class="form-group">
+										<label>Subjects</label>
+										<p-dropdown
+											[options]="subjects"
+											class="p-inputtext-sm"
+											optionLabel="name"
+											optionValue="id"
+											[(ngModel)]="subjectId"
+											[ngModelOptions]="{ standalone: true }"
+											[style]="{ width: '100%' }"
+											(onChange)="onFilterDropDownChanged()"
+										>
+											<div [style]="{ width: '100%' }">
+												<ng-template let-item pTemplate="item">
+													{{ item.name }}
+												</ng-template>
+											</div>
+										</p-dropdown>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-5"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<p-table
+								[columns]="columns"
+								[value]="listOfClasses"
+								[paginator]="true"
+								[rows]="pageSize"
+								[(first)]="currentPage"
+								[lazy]="true"
+								(onLazyLoad)="loadClassesLazy($event)"
+								[responsive]="true"
+								currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+								[rowsPerPageOptions]="[10, 20, 50]"
+								[totalRecords]="totalRecordCount"
+								styleClass="p-datatable-gridlines p-datatable-sm"
+								selectionMode="single"
+							>
+								<ng-template pTemplate="header" let-columns>
+									<tr>
+										<th style="text-align: center">Actions</th>
+										<th *ngFor="let col of columns">
+											{{ col.header }}
+										</th>
+									</tr>
+								</ng-template>
+								<ng-template pTemplate="body" let-rowData let-columns="columns">
+									<tr>
+										<td style="text-align: center">
+											<div class="buttons">
+												<span>
+													<button class="btn btn-icon btn-sm btn-info" (click)="viewClassDetails(rowData)">
+														<i class="fa fa-eye"></i> View
+													</button>
+												</span>
+											</div>
+										</td>
+										<td *ngFor="let col of columns">
+											{{ rowData[col.field] }}
+										</td>
+									</tr>
+								</ng-template>
+							</p-table>
+						</div>
+					</div>
+				</p-card>
+			</div>
+		</div>
+	</div>
+</section>

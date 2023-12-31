@@ -1,0 +1,146 @@
+<section class="main-content">
+	<p-confirmDialog
+		[style]="{ width: '25vw' }"
+		acceptButtonStyleClass="p-button-raised p-button-danger"
+		rejectButtonStyleClass="p-button-raised p-button-success"
+	></p-confirmDialog>
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Admin</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+		<li class="breadcrumb-item">Subject</li>
+	</ul>
+	<div class="section-body">
+		<div class="row clearfix">
+			<div
+				class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+				[style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }"
+			>
+				<div class="card">
+					<div class="p-10">
+						<div class="row">
+							<div class="col-12">
+								<div class="row m-0">
+									<div class="col-12 p-0">
+										<div class="ngxTableHeader">
+											<div class="table-title">
+												<h2><strong>Subject</strong></h2>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row">
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Search</label>
+												<input
+													type="text"
+													[(ngModel)]="name"
+													[ngModelOptions]="{ standalone: true }"
+													class="p-inputtext-sm"
+													[style]="{ width: '100%' }"
+													placeholder="Search by name"
+													name="searchText"
+													pInputText
+												/>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Subject Stream</label>
+												<p-dropdown
+													[options]="subjectStreams"
+													class="p-inputtext-sm"
+													optionLabel="name"
+													optionValue="id"
+													[(ngModel)]="selectedSubjectStreamId"
+													[ngModelOptions]="{ standalone: true }"
+													[style]="{ width: '100%' }"
+													placeholder="-All-"
+												>
+													<div [style]="{ width: '100%' }">
+														<ng-template let-item pTemplate="item">
+															{{ item.name }}
+														</ng-template>
+													</div>
+												</p-dropdown>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-5">
+											<button class="btn btn-primary me-2" (click)="getSubjectsByFilter()">Search</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<p-table
+									[value]="listOfSubjects"
+									[paginator]="true"
+									[rows]="pageSize"
+									[(first)]="currentPage"
+									[lazy]="true"
+									(onLazyLoad)="loadSubjects($event)"
+									[responsive]="true"
+									currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+									[rowsPerPageOptions]="[10, 20, 50]"
+									[totalRecords]="totalRecordCount"
+									styleClass="p-datatable-gridlines p-datatable-sm"
+								>
+									<ng-template pTemplate="header">
+										<tr>
+											<th>
+												<span>
+													<button class="btn btn-icon icon-left btn-primary rounded-button">
+														<i class="material-icons" (click)="openSubjectFormModal()">add</i>
+													</button></span
+												>
+											</th>
+											<th>Name</th>
+											<th>Subject Code</th>
+											<th>Subject Category Name</th>
+											<th>Created By Name</th>
+											<th>Created Date</th>
+											<th>Updated By Name</th>
+											<th>Updated Date</th>
+										</tr>
+									</ng-template>
+									<ng-template pTemplate="body" let-subject>
+										<tr>
+											<td>
+												<div class="buttons">
+													<span>
+														<button class="btn btn-icon btn-sm btn-primary" (click)="openSubjectEditFormModal(subject)">
+															<i class="far fa-edit"></i> Edit
+														</button>
+
+														<button class="btn btn-icon btn-sm btn-danger" (click)="deleteSubject(subject.id)">
+															<i class="far fa-trash-alt"></i> Delete
+														</button>
+													</span>
+												</div>
+											</td>
+											<td>{{ subject.name }}</td>
+											<td>{{ subject.subjectCode }}</td>
+											<td>{{ subject.subjectCategoryName }}</td>
+											<td>{{ subject.createdByName }}</td>
+											<td>{{ subject.createdDate }}</td>
+											<td>{{ subject.updatedByName }}</td>
+											<td>{{ subject.updatedDate }}</td>
+										</tr>
+									</ng-template>
+								</p-table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,108 @@
+<section class="main-content">
+
+    <ul class="breadcrumb breadcrumb-style">
+        <li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">STUDENT [ LESSONS ]</h5>
+		</li>
+        <li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+        <li class="breadcrumb-item">LESSONS</li>
+    </ul>
+
+    <hr>
+
+    <!-- <ng-container *ngFor="let lesson of listoflessons" [activeIndex]="selectedLessonIndex">
+        <p-panel header="{{lesson.lessonName}}">
+            <p>
+                {{ lesson.lessonDescription }}
+            </p>
+
+            <p-table [tableStyle]="{ 'min-width': '60rem' }">
+                <tr>
+                    <th>
+                        <p-card [style]="{ width: '320px' }">
+                            <ng-template pTemplate="header">
+                                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                            </ng-template>
+                            <button 
+                                class="btn btn-icon btn-sm btn-success" 
+                                (click)="watchLesson()"
+                            >
+                                <i class="fa fa-eye"></i>
+                                
+                            </button>
+                        </p-card>
+                    </th>
+
+                    <th>
+                        <p-card [style]="{ width: '320px' }">
+                            <ng-template pTemplate="header">
+                                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                            </ng-template>
+                            <button 
+                                class="btn btn-icon btn-sm btn-success" 
+                                (click)="watchLesson()"
+                            >
+                                <i class="fa fa-eye"></i>
+                                
+                            </button>
+                        </p-card>
+                    </th>
+
+                    <th>
+                        <p-card [style]="{ width: '320px' }">
+                            <ng-template pTemplate="header">
+                                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                            </ng-template>
+                            <button 
+                                class="btn btn-icon btn-sm btn-success" 
+                                (click)="watchLesson()"
+                            >
+                                <i class="fa fa-eye"></i>
+                                
+                            </button>
+                        </p-card>
+                    </th>
+                </tr>
+            </p-table>
+        </p-panel>
+        <br>
+    </ng-container> -->
+
+    <!-- <div class="card flex justify-content-center">
+        <p-tree class="w-full md:w-30rem" [value]="files"></p-tree>
+    </div>     -->
+
+    <p-accordion [activeIndex]="selectedLessonIndex">
+        <ng-container *ngFor="let lesson of listoflessons">
+            <p-accordionTab header = "{{lesson.lessonName}}">
+                
+                <p> {{ lesson.lessonDescription }}</p>
+                <p> {{ lesson.lessonGrade }} {{ lesson.lessonSubject }}</p>
+
+                <p-divider></p-divider>
+                <div class="buttons">
+                    <span>
+                        <button 
+                            class="btn btn-icon btn-sm btn-primary"
+                            (click)="navigateToResource(lesson.id)"
+                        >
+                            RESOURCES 
+                        </button>
+
+                        <button 
+                            class="btn btn-icon btn-sm btn-warning" 
+                        >
+                            ASSESSMENTS
+                        </button>
+                    </span>
+                </div>
+
+                
+                
+            </p-accordionTab>
+        </ng-container>
+    </p-accordion>
+    
+</section>

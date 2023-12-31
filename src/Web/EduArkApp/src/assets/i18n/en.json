@@ -1,0 +1,130 @@
+{
+	"HEADER": {
+		"SEARCH": {
+			"TEXT": "Search.."
+		}
+	},
+	"MENUITEMS": {
+		"ADMIN": {
+			"TEXT": "Admin",
+			"LIST": {
+				"USER": "Users",
+				"ACADEMIC_LEVEL": "Academic Levels",
+				"ACADEMIC_YEAR": "Academic Years",
+				"CLASS-NAME": "Class Names",
+				"CLASS": "Classes",
+				"CLASS-TEACHER": "Class Teachers",
+				"STUDENT": "Students",
+				"SUBJECT": "Subjects",
+				"SUBJECT-TEACHERS": "Subject Teachers",
+				"HEAD_Of_DEPARTMENT": "Head Of Department",
+				"SUBJECT-TARGET-SETTING": "Subject Target Setting"
+			}
+		},
+
+		"TEACHER": {
+			"TEXT": "Teacher",
+			"LIST": {
+				"USER": "Users",
+				"ACADEMIC_LEVEL": "Academic Levels",
+				"ACADEMIC_YEAR": "Academic Years",
+				"CLASS-NAME": "Class Names",
+				"CLASS": "Classes",
+				"CLASS-TEACHER": "Class Teachers",
+				"STUDENT": "Students",
+				"SUBJECT": "Subjects",
+				"SUBJECT-TEACHERS": "Subject Teachers",
+				"HEAD_Of_DEPARTMENT": "Head Of Department"
+			}
+		},
+		"NOTISES": {
+			"TEXT": "Notises"
+		},
+		"SUPPORT": {
+			"TEXT": "Support"
+		},
+		"CALENDAR": {
+			"TEXT": "Calendar"
+		},
+		"REPORTS": {
+			"TEXT": "Reports"
+		},
+		"LIBRARIES": {
+			"TEXT": "Libraries"
+		},
+		"USERS": {
+			"TEXT": "Users"
+		},
+		"COMPLAINTS": {
+			"TEXT": "Complaints"
+		},
+
+		"ACADEMIC-LEVELS": {
+			"TEXT": "Academic Levels"
+		},
+		"MAIN": {
+			"TEXT": "-- Main"
+		},
+		"HOME": {
+			"TEXT": "Home",
+			"LIST": {
+				"DASHBOARD1": "Dashboard 1",
+				"DASHBOARD2": "Dashboard 2"
+			}
+		},
+		"ADVANCE-TABLE": {
+			"TEXT": "Advance Table"
+		},
+		"APPS": {
+			"TEXT": "-- Apps"
+		},
+
+		"EMAIL": {
+			"TEXT": "Email",
+			"LIST": {
+				"INBOX": "Inbox",
+				"COMPOSE": "Compose",
+				"READ": "Read Email"
+			}
+		},
+		"MORE-APPS": {
+			"TEXT": "More Apps",
+			"LIST": {
+				"CHAT": "Chat",
+				"BLOG": "Blog",
+				"DRAG-DROP": "Drag & Drop",
+				"CONTACT-GRID": "Contact Grid"
+			}
+		},
+		"COMPONENTS": {
+			"TEXT": "-- Components"
+		},
+		"WIDGETS": {
+			"TEXT": "Widgets",
+			"LIST": {
+				"CHART-WIDGET": "Chart-Widget",
+				"DATA-WIDGET": "Data-Widget"
+			}
+		},
+		"FORMS": {
+			"TEXT": "Forms",
+			"LIST": {
+				"BASIC": "Basic Form",
+				"ADVANCE": "Advance Control",
+				"EXAMPLE": "Form Examples",
+				"VALIDATION": "Form Validation",
+				"WIZARD": "Wizard",
+				"INPUT-MASK": "Input Mask",
+				"SELECT-ITEM": "Select Item",
+				"EDITORS": "Editors"
+			}
+		},
+		"TABLES": {
+			"TEXT": "Tables",
+			"LIST": {
+				"BASIC": "Basic Tables",
+				"ADVANCE": "Advance Tables"
+			}
+		}
+	}
+}

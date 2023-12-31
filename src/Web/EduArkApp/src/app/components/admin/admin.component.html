@@ -1,0 +1,209 @@
+<section class="main-content">
+	<div class="section-body pt-4">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">{{ currentDateTime }}</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/5.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Number Of Academic Users - {{ dashboardModel?.academicUsersCount }}</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/2.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Number Of Students - {{ dashboardModel?.studentCount }}</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/6.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Active Classes - {{ dashboardModel?.classCount }}0</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/1.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing" (click)="navigateUserController()">
+									<div class="card-content">
+										<h5 class="font-20">Users Controller</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/9.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row" (click)="navigateSubjectController()">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Subjects Controller</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/8.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row" (click)="classController()">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Class Controller</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/10.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row" (click)="navigateStudentMarkAnalysis()">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Student Performance Analyzer Service</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/7.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row" (click)="subjectTeachersController()">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Subject Teachers</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/11.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-statistic-4">
+						<div class="align-items-center justify-content-between">
+							<div class="row" (click)="academicLevelController()">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 left-grid-spacing">
+									<div class="card-content">
+										<h5 class="font-20">Academic Levels</h5>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right-grid-spacing">
+									<div class="banner-img">
+										<img src="assets/images/banner/12.png" alt="" width="150" height="100" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

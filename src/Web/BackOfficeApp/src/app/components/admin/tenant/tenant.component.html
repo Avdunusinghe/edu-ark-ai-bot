@@ -1,0 +1,139 @@
+<section class="main-content">
+	<p-confirmDialog
+		[style]="{ width: '25vw' }"
+		acceptButtonStyleClass="p-button-raised p-button-danger"
+		rejectButtonStyleClass="p-button-raised p-button-success"
+	></p-confirmDialog>
+
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Admin</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+		<li class="breadcrumb-item">Tenants</li>
+	</ul>
+	<div class="section-body">
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="p-10">
+						<div class="row">
+							<div class="col-12">
+								<div class="row m-0">
+									<div class="col-12 p-0">
+										<div class="ngxTableHeader">
+											<div class="table-title">
+												<h2><strong>Tenants</strong></h2>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row">
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Search</label>
+												<input
+													type="text"
+													[(ngModel)]="name"
+													[ngModelOptions]="{ standalone: true }"
+													class="p-inputtext-sm"
+													[style]="{ width: '100%' }"
+													placeholder="Search by name"
+													name="searchText"
+													pInputText
+												/>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-3">
+											<div class="form-group">
+												<label>Tenant Type</label>
+												<p-dropdown
+													[options]="tenantTypeStatus"
+													class="p-inputtext-sm"
+													optionLabel="name"
+													optionValue="id"
+													[(ngModel)]="selectedTenantType"
+													[ngModelOptions]="{ standalone: true }"
+													[style]="{ width: '100%' }"
+													placeholder="-All-"
+												>
+													<div [style]="{ width: '100%' }">
+														<ng-template let-item pTemplate="item">
+															{{ item.name }}
+														</ng-template>
+													</div>
+												</p-dropdown>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ps-3 pe-3 pt-5">
+											<button class="btn btn-primary me-2" (click)="getTenantsByFilter()">Search</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<p-table
+									[value]="listOfTenants"
+									[paginator]="true"
+									[rows]="pageSize"
+									[(first)]="currentPage"
+									[lazy]="true"
+									(onLazyLoad)="loadTenants($event)"
+									[responsive]="true"
+									currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+									[rowsPerPageOptions]="[5, 10, 50]"
+									[totalRecords]="totalRecordCount"
+									styleClass="p-datatable-gridlines p-datatable-sm"
+								>
+									<ng-template pTemplate="header">
+										<tr>
+											<th>
+												<span>
+													<button class="btn btn-icon icon-left btn-primary rounded-button">
+														<i class="material-icons" (click)="routeTenantDetailsModule(0)">add</i>
+													</button></span
+												>
+											</th>
+											<th>Name</th>
+											<th>Domain</th>
+											<th>Data Server</th>
+										</tr>
+									</ng-template>
+									<ng-template pTemplate="body" let-tenant>
+										<tr>
+											<td [width]="200">
+												<div class="buttons">
+													<span>
+														<button
+															class="btn btn-icon btn-sm btn-primary"
+															(click)="routeTenantDetailsModule(tenant.id)"
+														>
+															<i class="far fa-edit"></i> Edit
+														</button>
+
+														<button class="btn btn-icon btn-sm btn-danger" (click)="deleteTenant(tenant.id)">
+															<i class="far fa-trash-alt"></i> Delete
+														</button>
+													</span>
+												</div>
+											</td>
+											<td>{{ tenant.name }}</td>
+											<td>{{ tenant.domain }}</td>
+											<td>{{ tenant.name }}</td>
+										</tr>
+									</ng-template>
+								</p-table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

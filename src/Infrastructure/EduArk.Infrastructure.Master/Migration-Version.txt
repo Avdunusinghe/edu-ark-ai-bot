@@ -1,0 +1,12 @@
+﻿﻿Enable-Migrations -Project EduArk.Infrastructure.Master -StartUp EduArk.API -Verbose
+
+
+
+Add-Migration EduArkMaster00001 -Context MasterDbContext -Project EduArk.Infrastructure.Master -StartUp EduArk.Master.API -Verbose
+Add-Migration EduArkMaster00002 -Context MasterDbContext -Project EduArk.Infrastructure.Master -StartUp EduArk.Master.API -Verbose
+
+Update-Database -Context MasterDbContext -Project EduArk.Infrastructure.Master -StartUp EduArk.Master.API -Verbose
+
+Script-Migration -From EduArkMaster00001 -Project EduArk.Infrastructure.Master -StartUp EduArk.Master.API -Verbose
+
+

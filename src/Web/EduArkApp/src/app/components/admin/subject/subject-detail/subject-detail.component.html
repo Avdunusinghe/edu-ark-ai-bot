@@ -1,0 +1,176 @@
+<form [formGroup]="subjectDetailsForm" *ngIf="subjectDetailsForm">
+	<div class="row">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Name<span class="text-danger">*</span></label>
+			<input
+				type="text"
+				class="p-inputtext-sm"
+				placeholder="Name"
+				formControlName="name"
+				required
+				[style]="{ width: '100%' }"
+				pInputText
+			/>
+			<small
+				class="form-text text-danger"
+				*ngIf="!subjectDetailsForm.get('name').valid && subjectDetailsForm.get('name').touched"
+			>
+				Name is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Subject Code<span class="text-danger">*</span></label>
+			<input
+				type="text"
+				class="p-inputtext-sm"
+				placeholder="Subject Code"
+				formControlName="subjectCode"
+				required
+				[style]="{ width: '100%' }"
+				pInputText
+			/>
+			<small
+				class="form-text text-danger"
+				*ngIf="!subjectDetailsForm.get('subjectCode').valid && subjectDetailsForm.get('subjectCode').touched"
+			>
+				Subject Code is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Subject Type<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="subjectTypes"
+				formControlName="subjectType"
+				optionLabel="name"
+				class="p-inputtext-sm"
+				[filter]="true"
+				filterBy="name"
+				optionValue="id"
+				[style]="{ width: '100%' }"
+				placeholder="Select Subject Type"
+				appendTo="body"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-subjectType pTemplate="item">
+						{{ subjectType.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!subjectDetailsForm.get('subjectType').valid && subjectDetailsForm.get('subjectType').touched"
+			>
+				Subject Type is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2" *ngIf="subjectType === 3">
+			<label>Parent Subject<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="parentBasketSubjects"
+				formControlName="parentBasketSubjectId"
+				optionLabel="name"
+				class="p-inputtext-sm"
+				[filter]="true"
+				filterBy="name"
+				optionValue="id"
+				[style]="{ width: '100%' }"
+				placeholder="Select Subject Type"
+				appendTo="body"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-subjectType pTemplate="item">
+						{{ subjectType.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!subjectDetailsForm.get('subjectType').valid && subjectDetailsForm.get('subjectType').touched"
+			>
+				Parent Subject is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Subject Category<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="subjectCategories"
+				formControlName="subjectCategory"
+				optionLabel="name"
+				class="p-inputtext-sm"
+				[filter]="true"
+				filterBy="name"
+				optionValue="id"
+				[style]="{ width: '100%' }"
+				placeholder="Select Subject Category"
+				appendTo="body"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-subjectCategory pTemplate="item">
+						{{ subjectCategory.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!subjectDetailsForm.get('subjectCategory').valid && subjectDetailsForm.get('subjectCategory').touched"
+			>
+				Parent Subject is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Stream<span class="text-danger">*</span></label>
+			<p-dropdown
+				[options]="subjectStreams"
+				formControlName="subjectStreamId"
+				optionLabel="name"
+				class="p-inputtext-sm"
+				[filter]="true"
+				filterBy="name"
+				optionValue="id"
+				[style]="{ width: '100%' }"
+				placeholder="Select Subject Stream"
+				appendTo="body"
+			>
+				<div [style]="{ width: '100%' }">
+					<ng-template let-subjectStream pTemplate="item">
+						{{ subjectStream.name }}
+					</ng-template>
+				</div>
+			</p-dropdown>
+			<small
+				class="form-text text-danger"
+				*ngIf="!subjectDetailsForm.get('subjectStreamId').valid && subjectDetailsForm.get('subjectStreamId').touched"
+			>
+				Subject Stream is required</small
+			>
+		</div>
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+			<label>Subject Academic Levels<span class="text-danger">*</span></label>
+			<p-multiSelect
+				[options]="academicLevels"
+				[style]="{ width: '100%', height: '60%' }"
+				defaultLabel="Select Role"
+				formControlName="subjectAcademicLevels"
+				appendTo="body"
+				optionLabel="name"
+				optionValue="id"
+				display="chip"
+				[filter]="false"
+			></p-multiSelect>
+			<small
+				class="form-text text-danger"
+				*ngIf="
+					!subjectDetailsForm.get('subjectAcademicLevels').valid &&
+					subjectDetailsForm.get('subjectAcademicLevels').touched
+				"
+			>
+				Please select Academic Levels</small
+			>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" [disabled]="!subjectDetailsForm.valid" (click)="saveSubject()">
+				Save
+			</button>
+		</div>
+	</div>
+</form>

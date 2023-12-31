@@ -1,0 +1,134 @@
+<section class="main-content">
+	<ul class="breadcrumb breadcrumb-style">
+		<li class="breadcrumb-item">
+			<h5 class="page-title m-b-0">Profile</h5>
+		</li>
+		<li class="breadcrumb-item bcrumb-1">
+			<a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+		</li>
+		<li class="breadcrumb-item">{{ currentUserDetails?.firstName }} {{ currentUserDetails?.lastName }}</li>
+	</ul>
+	<div class="section-body">
+		<div class="row mt-sm-4">
+			<div class="col-12 col-md-12 col-lg-4">
+				<div class="card author-box" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+					<div class="card-body">
+						<div class="author-box-center">
+							<img
+								alt="image"
+								[src]="
+									currentUserDetails?.profileImageUrl != null
+										? currentUserDetails?.profileImageUrl
+										: 'assets/images/users/user-1.png'
+								"
+								class="img-circle user-img-circle"
+								width="150px"
+								height="150px"
+							/>
+							<div class="clearfix"></div>
+							<div class="author-box-name">
+								<a href="#" onClick="return false;"
+									>{{ currentUserDetails?.firstName }} {{ currentUserDetails?.lastName }}</a
+								>
+							</div>
+							<div class="author-box-job">{{ currentUserDetails?.roleName }}</div>
+						</div>
+						<div class="text-center">
+							<div class="author-box-description">
+								<div class="buttons">
+									<button
+										type="button"
+										label="Change Profile"
+										(click)="fileInput.click()"
+										class="btn btn-icon btn-info"
+										pTooltip="Upload Profile Picture"
+										tooltipPosition="top"
+									>
+										<i class="far fa-file"></i
+										><input
+											#fileInput
+											type="file"
+											(change)="onFileChange($event)"
+											class="form-control"
+											name="documents"
+											style="display: none"
+										/>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+					<div class="card-header">
+						<h4>Personal Details</h4>
+					</div>
+					<div class="card-body">
+						<div class="py-4">
+							<p class="clearfix">
+								<span class="float-start"> Full Name </span>
+								<span class="float-end text-muted">
+									{{ currentUserDetails?.firstName }} {{ currentUserDetails?.lastName }}
+								</span>
+							</p>
+							<p class="clearfix">
+								<span class="float-start"> Phone </span>
+								<span class="float-end text-muted"> {{ currentUserDetails?.phoneNumber }} </span>
+							</p>
+							<p class="clearfix">
+								<span class="float-start"> Email </span>
+								<span class="float-end text-muted"> {{ currentUserDetails?.email }} </span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-12 col-lg-8">
+				<div class="card" [style]="{ border: '1px solid #e0e0e0', 'border-radius': '0' }">
+					<div class="padding-20">
+						<p-tabView [(activeIndex)]="activeTabIndex">
+							<p-tabPanel header="Edit Profile">
+								<form [formGroup]="currentUserProfileEditForm" *ngIf="currentUserProfileEditForm">
+									<div class="row">
+										<div class="form-group col-md-6 col-12">
+											<label>First Name</label>
+											<input type="text" class="form-control" formControlName="firstName" />
+										</div>
+										<div class="form-group col-md-6 col-12">
+											<label>Last Name</label>
+											<input type="text" class="form-control" formControlName="lastName" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6 col-12">
+											<label>Email</label>
+											<input type="email" class="form-control" formControlName="email" />
+										</div>
+										<div class="form-group col-md-6 col-12">
+											<label>User Name</label>
+											<input type="email" class="form-control" formControlName="userName" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6 col-12">
+											<label>Phone</label>
+											<input type="tel" class="form-control" formControlName="phoneNumber" />
+										</div>
+									</div>
+								</form>
+								<button class="btn btn-success">Update Account</button>
+							</p-tabPanel>
+							<p-tabPanel header="Reset Password"><app-password-reset-form></app-password-reset-form> </p-tabPanel>
+							<p-tabPanel header="Submit your behavior" *ngIf="currentUser?.roles[0] === 'Student'"
+								><app-student-behavior-form
+									*ngIf="activeTabIndex === 2"
+									[studentId]="currentUser.userId"
+								></app-student-behavior-form>
+							</p-tabPanel>
+						</p-tabView>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

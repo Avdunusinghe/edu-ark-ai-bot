@@ -1,0 +1,32 @@
+﻿﻿Enable-Migrations -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+
+Add-Migration EduArk00001 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+
+Add-Migration EduArkTenant00001  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration EduArkTenant00002  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration EduArkTenant00003  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration EduArkTenant00004  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration EduArkTenant00005  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration EduArkTenant00006  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_78_1  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_78_2  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_78_3  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_78_4  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_78_5  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_85_1  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Add-Migration Edu_Ark_Development_85_2  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+
+Update-Database  -Context TenantDbContext -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+
+Script-Migration -Context TenantDbContext -From EduArkTenant00001 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From EduArkTenant00002 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From EduArkTenant00003 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From EduArkTenant00004 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From EduArkTenant00005 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From EduArkTenant00006 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From Edu_Ark_Development_78_1 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From Edu_Ark_Development_78_2 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From Edu_Ark_Development_78_3 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From Edu_Ark_Development_78_4 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From Edu_Ark_Development_78_5 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose
+Script-Migration -Context TenantDbContext -From Edu_Ark_Development_85_1 -Project EduArk.Infrastructure.Tenant -StartUp EduArk.API -Verbose

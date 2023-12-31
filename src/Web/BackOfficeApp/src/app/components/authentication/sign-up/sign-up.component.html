@@ -1,0 +1,71 @@
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+	<div class="container" style="padding-left: 300px">
+		<div class="card login-card mb-0" style="width: 700px">
+			<div class="row no-gutters">
+				<div>
+					<div class="login-body">
+						<div class="text-center">
+							<div class="brand-wrapper"></div>
+						</div>
+						<form class="validate-form" [formGroup]="userAuthenticationForm" *ngIf="userAuthenticationForm">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group position-relative">
+										<label>User Name <span class="text-danger">*</span></label
+										><i-feather name="user" class="login-icons"></i-feather>
+										<input type="email" class="form-control psl-5" formControlName="userName" placeholder="Email" />
+										<small
+											class="form-text text-danger"
+											*ngIf="
+												!userAuthenticationForm.get('userName').valid && userAuthenticationForm.get('userName').touched
+											"
+										>
+											User name is required</small
+										>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group position-relative">
+										<label>Password <span class="text-danger">*</span></label
+										><i-feather name="key" class="login-icons"></i-feather>
+										<input
+											type="password"
+											class="form-control psl-5"
+											formControlName="password"
+											placeholder="Password"
+										/>
+										<small
+											class="form-text text-danger"
+											*ngIf="
+												!userAuthenticationForm.get('password').valid && userAuthenticationForm.get('password').touched
+											"
+										>
+											Password is required</small
+										>
+									</div>
+								</div>
+								<div class="col-lg-12 mb-0">
+									<button
+										class="btn btn-primary auth-form-btn"
+										[disabled]="isLoading || userAuthenticationForm.invalid"
+										(click)="login()"
+									>
+										<i class="fa" [ngClass]="{ 'fa-spin fa-spinner': isLoading, 'fa-check': !isLoading }"></i>
+										{{ button }}
+									</button>
+								</div>
+								<div class="col-lg-12">
+									<div class="d-flex justify-content-between">
+										<!-- <p class="forgot-pass mb-0">
+											<a routerLink="#" class="text-dark fw-bold">Forgot password ?</a>
+										</p> -->
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
